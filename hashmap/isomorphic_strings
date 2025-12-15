@@ -1,0 +1,27 @@
+"""
+LeetCode #205
+Isomorphic Strings
+
+Approach:
+- Use two hash maps:
+      * s_to_t map characters from 's' to 't'
+      * t_to_s map characters from 't' to 's'
+- Iterate through both strings simultaneously
+- Validate mappings in both directions to ensure a one-to-one mapping
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+"""
+def isomorphic_strings(s, t):
+    s_to_t = {}
+    t_to_s = {}
+    for char_s, char_t in zip(s, t):
+        if char_s in s_to_t:
+            if s_to_t[char_s] != char_t:
+                return False
+        if char_t in t_to_s:
+            if t_to_s[char_t] != char_s:
+                return False
+        t_to_s[char_t] = char_s
+        s_to_t[char_s] = char_t
+    return True
